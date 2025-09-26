@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="no-js">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ShowsStoppers world – Watch TV Shows Online, Watch Movies Online</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"
+        integrity="sha256-t2kyTgkh+fZJYRET5l9Sjrrl4UDain5jxdbqe8ejO8A=" crossorigin="anonymous" />
+
+    <!--for global styling-->
+   <link rel="stylesheet" href="{% static 'assets/css/global.css' %}">
+    <!-- for footer and header-->
+    <link rel="stylesheet" href="{% static 'assets/css/browse.css' %}">
+    <!--custom styling-->
+    <link rel="stylesheet" href="{% static 'assets/css/userprofile.css' %}">
+
+</head>
+
+<body>
+
+    <main id="mainContainer" class="p-b-40">
+
+        <header class="d-flex space-between flex-center flex-middle">
+            <div class="nav-links d-flex flex-center flex-middle">
+                <a href="/home">
+                    <h2 class="logo logo-text red-color f-s-28 m-r-25">SHOWSSTOPPERS</h2>
+                    <h2 class="second-logo-text red-color f-s-28">SS</h2>
+                </a>
+               <a href="/home" class="nav-item">Home</a>
+
+                <a href="/latest" class="nav-item">Latest</a>
+            </div>
+            <div class="righticons d-flex flex-end flex-middle">
+                    <a href="#"><img src="{% static 'assets/images/icons/search.svg' %}" alt="search icon"></a>
+                    <div class="dropdown notification">
+                        <img src="{% static 'assets/images/icons/notification.svg' %}" alt="notificatio icon">
+                    </div>
+
+                    <div class="dropdown">
+
+                        {% if request.user.pic %}
+                        <img src="{% static 'assets/images/icons/user-image-green.png' %}" alt="user profile icon" class="user-icon"> <span class="profile-arrow"></span>
+                        {% else %}
+                        <img src="{% static 'assets/u.png' %}" alt="user profile icon" class="user-icon"> <span class="profile-arrow"></span>
+
+                        {% endif %}
+                        <div class="dropdown-content">
+                            <div class="profile-links">
+                                <a href="#" >Username - {{request.user.username}}</a>
+                            </div>
+                            <div class="line"></div>
+                            <div class="links d-flex direction-column">
+                                <a href="/dashbord">Account</a>
+                                <a href="#">Help Center</a>
+                                <form method="post" action="/accounts/logout/">
+                     {% csrf_token %}
+                <button  class="button logoutButton">
+                    Sign Out of ShowsStoppers
+
+                </button>
+                                    </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </header>
+
+
+        <!--profile section-->
+        <section class="userprofile" id="userprofilecontainer">
+            <div>
+                <h2 class="heading f-s-40">
+                    Account
+                </h2>
+            </div>
+            <div class="line"></div>
+            <div class="membership d-flex flex-no-wrap space-between">
+
+                <div class="right">
+                  {% if request.user.username %}
+                  <div class="d-flex space-between">
+                        <div class="email">
+
+                            <strong>Username : {{ request.user.username }}</strong>
+
+                        </div>
+
+                    </div>
+                {% endif  %}
+                {% if request.user.email %}
+                    <div class="d-flex space-between">
+                        <div class="email">
+
+                            <strong>Email ID : {{ request.user.email }}</strong>
+
+                        </div>
+                        <div class="link">
+                            <a href="{% url 'account_email' %}" class="link-item">
+                                Change account email
+                            </a>
+                        </div>
+                    </div>
+                   {% endif  %}
+                    {% if request.user.password %}
+                    <div class="d-flex space-between">
+
+                        <div class="password">
+
+                            Password: {{request.user.password}} (May Be Encrypted)
+
+                        </div>
+                        <div class="link">
+                            <a  href="{% url 'account_reset_password' %}" class="link-item">
+                                Change password
+                            </a>
+                        </div>
+                    </div>
+                   {% endif %}
+                      {% if request.user.phone %}
+                    <div class="d-flex space-between">
+                        <div class="email">
+
+                            Phone: {{request.user.phone }}
+
+                        </div>
+                        <div class="link">
+                            <a href="#" class="link-item">
+                                Change phone number
+                            </a>
+                        </div>
+                    </div>
+                   {% endif %}
+                    <div class="line"></div>
+            <!--settings-->
+            <div class="settings d-flex ">
+                <div class="left">
+                    <h4 class="headline">SETTINGS</h4>
+                </div>
+
+            </div>
+            <div class="line">
+                <div  style="float:left">
+                   <a href="#" class="link-item">Download your personal information</a>
+                    <form method="post" action="/accounts/logout/">
+                     {% csrf_token %}
+                <button  class="button logoutButton" style="background-color:red;" >
+                    <h6 style="color:white">Sign Out</h6>
+                </button>
+                    </form>
+                </div>
+            </div>
+
+            </div>
+
+
+            <!--parental control-->
+        </section>
+
+        <!--footer section and footer fixed menu mobile-->
+
+        <footer class="mainfooter d-flex direction-column space-between" id="footer">
+            <div class="container footer-container flex-start">
+                <div class="widgets d-flex space-between">
+                    <div class="first-widget">
+                        <ul>
+                            <li class="list-item">Audio and Subtitles</li>
+                            <li class="list-item">Media Center</li>
+                            <li class="list-item">Privacy</li>
+                            <li class="list-item">Contact us</li>
+                        </ul>
+                    </div>
+                    <div class="second-widget">
+                        <ul>
+                            <li class="list-item">Help Center</li>
+                            <li class="list-item">Cookie</li>
+                            <li class="list-item">Jobs</li>
+                        </ul>
+                    </div>
+                    <div class="third-widget">
+                        <ul>
+                            <li class="list-item">Audio Description</li>
+                            <li class="list-item">Investor Relations</li>
+                            <li class="list-item">Legal Notice</li>
+                        </ul>
+                    </div>
+                    <div class="forth-widget">
+                        <ul>
+                            <li class="list-item">Gift Card</li>
+                            <li class="list-item">Term Of Use</li>
+                            <li class="list-item">Corporate Information</li>
+                        </ul>
+                    </div>
+                </div>
+                <button class="button service">Service Code</button>
+                <p class="copyright">@copyright 2020 Vanilacodes, Inc.</p>
+            </div>
+
+
+        </footer>
+        </div>
+
+
+    </main>
+<div class="footer-navigation d-flex space-between">
+        <a href="/home" class="nav-item ">
+            <i class="fa fa-home" aria-hidden="true"></i> </br>
+            <span>Home</span>
+        </a>
+        <a href="/search" class="nav-item">
+            <i class="fa fa-search" aria-hidden="true"></i></br>
+            Search
+        </a>
+        <a href="/latest" class="nav-item">
+            <i class="fa fa-film" aria-hidden="true"></i></br>
+            Latest
+        </a>
+
+        <a href="/dashbord" class="nav-item">
+            <i class="fa fa-user" aria-hidden="true"></i></br>
+            Account
+        </a>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html class="no-js">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ShowsStoppers – Watch TV Shows Online, Watch Movies Online</title>
+    <meta name="description" content="Watch Netflix movies & TV shows online or stream right to your smart TV, game console, PC, Mac, mobile, tablet and more.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'assets/css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/landing-pages.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/images/favicon.ico'%}"/>
+</head>
+
+<body style="background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.9) 100%),url('{% static 'assets/background_netflix.png'%}');">
+
+    <main style="padding: 0px 10px;">
+        <header class="d-flex space-between middle-align" style="margin-top:-5%">
+            <img src="{% static 'assets/ss.png' %}"  height="200px" width="300px" alt="site logo main"></img>
+        </header>
+        <section id="logout-section d-flex flex-center" style="margin-top:-7%">
+            <div class="logoutContainer f-s-20 d-flex flex-center direction-column">
+                <h2 class="signOutHeader f-s-28 f-w-4" style="margin: 0;">
+                    Signed Out
+                </h2>
+                <p class="logoutMessage">
+                    This computer will be redirected to the ShowsStoppers Login page in 10 seconds.
+                </p>
+                    <button  class="button logoutButton" style="background-color:red;" onclick="location.href='/accounts/login'">
+                    <h6 style="color:white">Continue</h6>
+                </button>
+            </div>
+        </section>
+    </main>
+</body>
+<script>
+       setTimeout(function() {
+  window.location.href = "/accounts/login";
+}, 10000); // 5000 milliseconds (5 seconds) delay before redirecting
+
+   </script>
+
+</html>

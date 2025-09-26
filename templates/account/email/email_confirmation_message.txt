@@ -1,0 +1,15 @@
+{% extends "account/email/base_message.txt" %}
+{% load account %}
+{% load i18n %}
+
+{% block content %}{% autoescape off %}{% user_display user as user_display %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+Dear, {{ user_display }}
+Thank you for registering with our platform.
+
+To complete the registration process and access all the features,please confirm your account by clicking on the link below:
+{{ activate_url }}
+
+{% endblocktrans %}
+{% endautoescape %}
+{% endblock %}

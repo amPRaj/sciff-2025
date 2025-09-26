@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html class="no-js">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ShowsStoppers login – Watch TV Shows Online, Watch Movies Online | do not enter you any of the information</title>
+    <meta name="description" content="This is a frontend only clone of netflix - Watch Netflix movies & TV shows online or stream right to your smart TV, game console, PC, Mac, mobile, tablet and more.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'assets/css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/landing-pages.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/images/favicon.ico'%}"  />
+</head>
+
+<body>
+    <style>
+        body::before{
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0.9) 100%),url('{% static 'assets/background_netflix.png'%}');
+
+        }
+    </style>
+    <main style="padding: 0px 10px;">
+        <header class="d-flex space-between middle-align">
+           <a href="/">
+            <img src="{% static 'assets/ss.png' %}" height="200px" width="300px" alt="site logo main" style="margin-top: -25%;"></img>
+        </a>
+        </header>
+        <section id="login-form-section" style="margin-top:-5%">
+            <!--Login form start-->
+
+                <div class="loginContainer d-flex direction-column">
+                    <p>⚠ Do not enter your personal information.</p>
+                    <h2 class="formtitle">
+                        Sign In
+                    </h2>
+                    <form id="loginForm" class="d-flex direction-column" name="loginForm" method="POST" action="/accounts/login/">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                        <p id="errorEmail" >Wrong Credentials.</p>
+                        {% endif %}
+                        <input class="email"  type="text" name="login" placeholder="Username or e-mail" autocomplete="email" required id="id_login">
+
+
+                        <input type="password" name="password" id="id_password" placeholder="Password" required/>
+                        <button type="submit" class="button submitButton" id="signInButton">
+                            <a style="text-decoration: none; color: white;">Sign In</a>
+                        </button>
+
+                        <div class="rememberMe">
+                            <input type="checkbox" name="rememberMe"  id="id_remember" class="rememberMe">
+                            <label for="id_remember"><span class="login-remember-me-label-text">Remember me</span></label>
+                            <a style="float:right" href="/accounts/password/reset/" class="text-blue-600">Forgot Password?</a>
+                        </div>
+                        <p class="signUpText para">
+                            New to ShowsStoppers? <span class="signUp"><a href="/accounts/signup/">Sign up Now</a></span>
+                            <span class="signUp" >Continue With <a href="/accounts/google/login/?process=login" style="color:red">Google</a></span>
+                        </p>
+                    </form>
+                </div>
+
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="no-js">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ShowsStoppers world – Watch TV Shows Online, Watch Movies Online</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"
+        integrity="sha256-t2kyTgkh+fZJYRET5l9Sjrrl4UDain5jxdbqe8ejO8A=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'assets/css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/browse.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/single.css' %}">
+
+    <!--html 5 video player-->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+    <script src="https://cdn.plyr.io/3.6.2/plyr.polyfilled.js"></script>
+
+</head>
+
+<body>
+
+    <main id="mainContainer" class="p-b-40">
+
+        <header class="d-flex space-between flex-center flex-middle">
+            <div class="nav-links d-flex flex-center flex-middle">
+                <a href="/home">
+                    <h2 class="logo logo-text red-color f-s-28 m-r-25">SHOWSSTOPPERS</h2>
+                    <h2 class="second-logo-text red-color f-s-28">SS</h2>
+                </a>
+                       <a href="/home" class="nav-item">Home</a>
+
+                <a href="/latest" class="nav-item">Latest</a>
+            </div>
+            <div class="righticons d-flex flex-end flex-middle">
+                <a href="/search"><img src="{% static 'assets/images/icons/search.svg'%}" alt="search icon"></a>
+                    <div class="dropdown notification">
+                        <img src="{% static 'assets/images/icons/notification.svg'%}" alt="notificatio icon">
+                    </div>
+
+                <div class="dropdown">
+
+                    {% if request.user.pic %}
+                    <img src="{% static 'assets/images/icons/user-image-green.png' %}" alt="user profile icon"
+                         class="user-icon"> <span class="profile-arrow"></span>
+                    {% else %}
+                    <img src="{% static 'assets/u.png' %}" alt="user profile icon" class="user-icon"> <span
+                        class="profile-arrow"></span>
+
+                    {% endif %}
+                    <div class="dropdown-content">
+                        <div class="profile-links">
+                            <a href="#">Username - {{request.user.username}}</a>
+                        </div>
+                        <div class="line"></div>
+                        <div class="links d-flex direction-column">
+                            <a href="/dashbord">Account</a>
+                            <a href="#">Help Center</a>
+                            <form method="post" action="/accounts/logout/">
+                                {% csrf_token %}
+                                <button class="button logoutButton">
+                                    Sign Out of ShowsStoppers
+
+                                </button>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </header>
+
+        <!-- hero section video-->
+        {% if mov %}
+        <div class="videocontainer">
+            <video controls crossorigin playsinline
+                poster="{{mov.image.url}}" id="player">
+                <!-- Video files -->
+                <source src="{{mov.file.url}}" type="video/mp4"
+                    >
+
+                <!-- Caption files -->
+                <track kind="captions" label="English" srclang="en"
+                    src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt" default>
+            </video>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                // This is the bare minimum JavaScript. You can opt to pass no arguments to setup.
+                const player = new Plyr('#player');
+
+                // Expose
+                window.player = player;
+
+                // Bind event listener
+                function on(selector, type, callback) {
+                    document.querySelector(selector).addEventListener(type, callback, false);
+                }
+            });
+        </script>
+
+
+        <section class="movieinformation container">
+
+            <div class="movierelease">
+                <span class="year">
+                    {{mov.year}}
+                </span>
+                <span class="rating">
+                   IMDB: {{mov.rate}}
+                </span>
+                <span class="timeduration">
+                    {{mov.dur}}
+                </span>
+            </div>
+            <div class="description">
+               {{mov.desc1}}
+            </div>
+            <div class="castinformation">
+                <p><span class="name">Director:</span> {{mov.dir}}</p>
+                <p><span class="name">Screenplay:</span> {{mov.screenplay}}</p>
+                <p><span class="name">Producers:</span> {{mov.prod}}</p>
+            </div>
+            <div class="actions d-flex flex-start flex-middle">
+                <a href="#" class="link-item">
+                    <i class="fa fa-thumbs-up"></i></br>
+                    Like
+                </a>
+                <a href="#" class="link-item">
+                    <i class="fa fa-share"></i></br>
+                    Share
+                </a>
+                <a href="#" class="link-item">
+                    <i class="fa fa-download"></i></br>
+                    Download
+                </a>
+            </div>
+        </section>
+
+
+
+
+        <!--Hollywood Action movies-->
+        {% if mor %}
+        <section id="similar" class="container p-t-40">
+            <h4 class="romantic-heading">
+                More LIke This
+            </h4>
+            {% for mov in mor %}
+            <div class="romantic-container d-flex flex-start flex-middle">
+                <a href="/{{mov.title}}/play">
+                    <img src="{{mov.image.url}}" alt=""
+                        class="mylist-img p-r-10 p-t-10 image-size item"></a>
+            </div>
+            {% endfor %}
+        </section>
+    {% endif %}
+        </div>
+
+    {% endif %}
+
+            <footer class="mainfooter d-flex direction-column space-between" id=" footer">
+                <div class="container footer-container flex-start">
+                    <div class="widgets d-flex space-between">
+                        <div class="first-widget">
+                            <ul>
+                                <li class="list-item">Privacy</li>
+
+                            </ul>
+                        </div>
+                        <div class="second-widget">
+                            <ul>
+                                <li class="list-item">Help Center</li>
+                            </ul>
+                        </div>
+                        <div class="third-widget">
+                            <ul>
+                                <li class="list-item">Contact us</li>
+                            </ul>
+                        </div>
+                        <div class="forth-widget">
+                            <ul>
+                                <li class="list-item">Term Of Use</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="button service">Service Code</button>
+                    <p class="copyright">Copyright 2023 ShowsStoppers.</p>
+                </div>
+
+
+            </footer>
+        </div>
+
+
+
+    </main>
+
+
+<div class="footer-navigation d-flex space-between">
+        <a href="/home" class="nav-item ">
+            <i class="fa fa-home" aria-hidden="true"></i> </br>
+            <span>Home</span>
+        </a>
+        <a href="/search" class="nav-item">
+            <i class="fa fa-search" aria-hidden="true"></i></br>
+            Search
+        </a>
+        <a href="/latest" class="nav-item">
+            <i class="fa fa-film" aria-hidden="true"></i></br>
+            Latest
+        </a>
+
+        <a href="/dashbord" class="nav-item">
+            <i class="fa fa-user" aria-hidden="true"></i></br>
+            Account
+        </a>
+    </div>
+
+
+
+</body>
+
+</html>

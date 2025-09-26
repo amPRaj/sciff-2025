@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html class="no-js">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ShowsStoppers Register – Watch TV Shows Online, Watch Movies Online</title>
+    <meta name="description" content="Watch Netflix movies & TV shows online or stream right to your smart TV, game console, PC, Mac, mobile, tablet and more.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'assets/css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/landing-pages.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/images/favicon.ico'%}"  />
+</head>
+
+<body>
+    <style>
+        body::before{
+             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0.9) 100%),url('{% static 'assets/background_netflix.png'%}');
+
+        }
+    </style>
+
+    <main style="padding: 0px 10px;">
+        <header class="d-flex space-between middle-align" style="margin-top:-5%">
+            <img src="{% static 'assets/ss.png' %}"  height="200px" width="300px" alt="site logo main"></img>
+            <button class="button"><a href="/accounts/login"> Sign In</a></button>
+        </header>
+        <section id="login-form-section" style="margin-top:-7%">
+            <!--Login form start-->
+
+                <div class="loginContainer d-flex direction-column">
+                    <h2 class="formtitle">
+                        Register Account
+                    </h2>
+                    <form action="/accounts/signup/" id="loginForm" class="d-flex direction-column" method="post" name="loginForm">
+                        {% csrf_token %}
+                        {% if form.email.errors %}
+                    <p id="errorEmail">
+                        {{form.email.errors.as_text}}
+                    </p>
+                    {% endif %}
+                    {% if form.username.errors %}
+                    <p id="errorEmail">
+                        {{form.username.errors.as_text}}
+                    </p>
+                    {% endif %}
+                    {% if form.password1.errors %}
+                    <p id="errorEmail">
+                        {{form.password1.errors.as_text}}
+                    </p>
+                    {% endif %}
+                     {% if form.password2.errors %}
+                    <p id="errorEmail">
+                        {{form.password2.errors.as_text}}
+                    </p>
+                    {% endif %}
+                        <input type="email" name="email" id="id_email" class="email" placeholder="Email" autocomplete="email" required/>
+
+                        <input class="email" type="text" name="username" placeholder="Username" autocomplete="username" minlength="1" maxlength="150" required id="id_username">
+
+                        <input type="password" name="password1" id="id_password1" placeholder="Password" autocomplete="new-password" required/>
+
+                        <input type="password" name="password2" id="id_password2" placeholder="Confirm Password" autocomplete="new-password" required/>
+
+                        <button type="submit" class="button submitButton" id="signInButton">
+                            Register
+                        </button>
+
+                        <p class="signUpText para">
+                            Have an account? <span class="signUp"><a href="/accounts/login">Sign In</a></span>
+                        </p>
+                    </form>
+                </div>
+
+            <!--Login form End-->
+        </section>
+    </main>
+</body>
+
+</html>

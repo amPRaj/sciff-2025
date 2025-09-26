@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html class="no-js">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ShowsStoppers– Watch TV Shows Online, Watch Movies Online</title>
+    <meta name="description" content="Netflix world – Watch TV Shows Online, Watch Movies Online">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'assets/css/landing-pages.css'%}">
+
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/images/favicon.ico'%}"  />
+
+</head>
+
+<body style="background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.9) 100%),url('{% static 'assets/background_netflix.png'%}');">
+   <main id="mainContainer" class="p-b-40">
+        <header class="d-flex space-between middle-align" style="margin-top:-3%">
+
+            <img src="{% static 'assets/ss.png' %}"  height="200px" width="300px" alt="site logo main"></img>
+            {% if request.user.is_authenticated %}
+            <button class="button"><a href="/accounts/logout"> Sign Out</a></button>
+            {% else %}
+            <button class="button"><a href="/accounts/login"> Sign In</a></button>
+            {% endif %}
+        </header>
+        <div style="background-color:black">
+    <header class="d-flex space-between middle-align" style="margin-top:3%">
+    <div class="d-flex space-between middle-align">
+        <h1 >
+            {% block extra_head %}
+    {% endblock %}
+        </h1>
+        <h3 >
+          {% block body %}
+    {% block content %}
+    {% endblock %}
+    {% endblock %}
+    {% block extra_body %}
+    {% endblock %}
+        </h3>
+    </div>
+    </div>
+</header>
+    </main>
+
+</body>
+
+</html>
