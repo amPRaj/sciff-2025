@@ -1,4 +1,4 @@
-# SHOWSSTOPPERS - Netflix Clone
+
 
 A full-featured Netflix-like streaming platform built with Django, featuring user authentication, content browsing, and video playback capabilities.
 
