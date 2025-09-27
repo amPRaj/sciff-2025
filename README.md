@@ -2,7 +2,7 @@
 
 A full-featured Netflix-like streaming platform built with Django, featuring user authentication, content browsing, and video playback capabilities.
 
-**Live Demo:** https://showsstoppers.pythonanywhere.com/
+
 
 ## Features
 
@@ -256,8 +256,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Logging and monitoring
 
 ## Support
-
-For support, email showsstoppers23@gmail.com or create an issue in the repository.
 # sciff-2025
 # sciff-2025
 # sciff-2025
